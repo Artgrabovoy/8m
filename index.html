@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>8 Марта Квест</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 20px;
+            background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+            color: #fff;
+        }
+        .hidden { display: none; }
+        .question { margin: 20px 0; padding: 20px; background: rgba(255, 255, 255, 0.2); border-radius: 10px; }
+        input {
+            padding: 10px;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            margin: 10px;
+            width: 80%;
+            background: rgba(255, 255, 255, 0.8);
+            color: #333;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            background: #ff758c;
+            color: white;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        button:hover { background: #ff516b; }
+    </style>
+</head>
+<body>
+    <h1>Квест 8 Марта 🎉</h1>
+    <p>Разгадай загадки, чтобы получить сюрприз!</p>
+    
+    <div id="question1" class="question">
+        <p><strong>Загадка 1:</strong> Где вы пьёте утренний кофе? ☕</p>
+        <input type="text" id="answer1" placeholder="Введите ответ">
+        <button onclick="checkAnswer(1, 'кухня')">Ответить</button>
+    </div>
+    
+    <div id="question2" class="question hidden">
+        <p><strong>Загадка 2:</strong> Поменяй буквы местами – она всегда с тобой в сумке: <strong>очСкаум</strong></p>
+        <input type="text" id="answer2" placeholder="Введите ответ">
+        <button onclick="checkAnswer(2, 'сумочка')">Ответить</button>
+    </div>
+    
+    <div id="question3" class="question hidden">
+        <p><strong>Загадка 3:</strong> Чем больше берёшь, тем больше остаётся? 👣</p>
+        <input type="text" id="answer3" placeholder="Введите ответ">
+        <button onclick="checkAnswer(3, 'следы')">Ответить</button>
+    </div>
+    
+    <div id="final" class="question hidden">
+        <p>Введите ключевое слово, чтобы получить подарок!</p>
+        <input type="text" id="finalCode" placeholder="Введите код">
+        <button onclick="checkFinalCode()">Проверить</button>
+    </div>
+    
+    <div id="congrats" class="question hidden">
+        <h2>Поздравляем! 🎁</h2>
+        <p>Вы прошли квест! Вот ваш подарок:</p>
+        <p><strong>Подарочный сертификат в магазин</strong></p>
+    </div>
+    
+    <script>
+        function checkAnswer(questionNumber, correctAnswer) {
+            let input = document.getElementById('answer' + questionNumber).value.toLowerCase().trim();
+            if (input === correctAnswer) {
+                document.getElementById('question' + questionNumber).classList.add('hidden');
+                let nextQuestion = document.getElementById('question' + (questionNumber + 1));
+                if (nextQuestion) {
+                    nextQuestion.classList.remove('hidden');
+                } else {
+                    document.getElementById('final').classList.remove('hidden');
+                }
+            } else {
+                alert('Неверно, попробуйте ещё раз!');
+            }
+        }
+        
+        function checkFinalCode() {
+            let input = document.getElementById('finalCode').value.toLowerCase().trim();
+            if (input === '8марта') {
+                document.getElementById('final').classList.add('hidden');
+                document.getElementById('congrats').classList.remove('hidden');
+            } else {
+                alert('Неверный код, попробуйте ещё раз!');
+            }
+        }
+    </script>
+</body>
+</html>
